@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "indic-pdf-translator"
+version = "0.2.0"
+description = "Layout-preserving PDF / document translation with LLM vision OCR, built for scanned Indian-language (Indic) legal documents."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Anmol Goel" }]
+keywords = [
+    "pdf translation",
+    "document translation",
+    "layout-preserving",
+    "ocr",
+    "indic",
+    "indian languages",
+    "hindi",
+    "legal documents",
+    "gemini",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Office/Business",
+    "Natural Language :: Hindi",
+    "Natural Language :: English",
+]
+dependencies = [
+    "pymupdf>=1.24",
+    "pillow>=10.0",
+]
+
+[project.optional-dependencies]
+# Google Gemini provider (vision OCR, layout, merge, translation).
+gemini = ["google-genai>=1.0", "python-dotenv>=1.0"]
+# Headless-browser rendering: screenshots for the layout review loop and HTML -> PDF export.
+render = ["playwright>=1.45"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23"]
+all = ["indic-pdf-translator[gemini,render]"]
+
+[project.scripts]
+indic-pdf-translate = "indic_pdf_translator.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/indic_pdf_translator"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

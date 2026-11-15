@@ -1,0 +1,29 @@
+# Secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+*.pem
+credentials*.json
+token*.json
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Tooling
+node_modules/
+.wrangler/
+*.log
+
+# Pipeline output (contains document text — never commit)
+output/
+Output/
+*.bin
+*.pkl
